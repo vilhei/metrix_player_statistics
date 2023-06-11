@@ -1,6 +1,7 @@
 import { createApp } from "vue";
-import "./style.css";
+import "./styles/style.css";
 import App from "./App.vue";
+import navigationBar from "./components/navigationBar.vue";
 
 const app = createApp(App);
 app.config.errorHandler = (err) => {
@@ -8,3 +9,6 @@ app.config.errorHandler = (err) => {
 };
 
 app.mount("#app");
+
+const nav = createApp(navigationBar);
+nav.mount("#navbar");

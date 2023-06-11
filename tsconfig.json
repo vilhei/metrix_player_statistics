@@ -20,12 +20,15 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": true
 
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@styles/*": ["src/styles/*"]
-    }
+    // "baseUrl": ".",
+    // "paths": {
+    //   "components/*": ["src/components/*"],
+    //   "assets/*": ["src/assets/*"],
+    //   "styles/*": ["src/styles/*"]
+    // }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/main.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
