@@ -60,4 +60,10 @@
 img {
   height: 75px;
 }
+
+@media (max-width: 720px) {
+  h1 {
+    font-size: 1em;
+  }
+}
 </style>
