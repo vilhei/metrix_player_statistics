@@ -1,27 +1,19 @@
 <script setup lang="ts">
-const fetchPlayerUrl: URL = new URL("https://discgolfmetrix.com/api.php?content=my_competitions");
+import { fetchPlayerCompetitions } from "../services/metrixApi";
+
 let integrationCode: string = "";
-let metrixId: string = "";
+let metrixId: number | null = null;
+
+const emit = defineEmits(["playerDataFetched"]);
 
 const getPlayerInfo = async () => {
-  //TODO
-  if (integrationCode === "" || metrixId === "") {
+  if (integrationCode === "" || metrixId === null) {
+    alert("Insert both codes");
     return;
   }
+  const data = await fetchPlayerCompetitions(integrationCode);
 
-  fetchPlayerUrl.searchParams.append("code", integrationCode);
-
-  const res = await fetch(fetchPlayerUrl);
-  if (res.status !== 200) {
-    console.error(`Status code ${res.status} received`);
-  }
-
-  const data = await res.json();
-  if (data === null) {
-    console.error(`No competitions found`);
-  }
-  
-  console.log(data);
+  emit("playerDataFetched", data);
 };
 </script>
 
@@ -48,10 +40,8 @@ const getPlayerInfo = async () => {
 <style scoped>
 input {
   margin: 1rem;
-  /* min-width: calc(max(50dvw, 300px)); */
   min-width: none;
   flex-grow: 1;
-  /* flex-basis: auto; */
 }
 @media (max-width: 720px) {
   button {
@@ -66,8 +56,6 @@ input {
 .inputLabel::before {
   content: attr(data-tooltip);
   position: absolute;
-  /* top: 50%; */
-  /* transform: translateY(-50%); */
   left: 50%;
   margin-left: 15px;
 
@@ -85,24 +73,7 @@ input {
   display: block;
 }
 
-/*
-.codeToolTip {
-  visibility: hidden;
-  text-align: center;
-  font-size: 18px;
-  background-color: black;
-  padding: 5px 0;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 1;
-} */
-
 .inputLabel:hover + .codeToolTip {
   visibility: visible;
-  /* background-color: red; */
 }
-
-/* .inputRow:hover .codeToolTip {
-  visibility: visible;
-} */
 </style>
