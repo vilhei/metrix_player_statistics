@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import userInputs from "./components/userInputs.vue";
+import { fetchCompetition } from "./services/metrixApi";
 
-let playerData: Ref<Number[]> = ref([]);
+let playerComps: Ref<number[]> = ref([]);
 
-function savePlayerCompetitionIds(data: Number[]) {
-  playerData.value = data;
+async function savePlayerCompetitionIds(data: number[], code: string) {
+  playerComps.value = data;
+
+  const res = await fetchCompetition(playerComps.value[0], code);
+  const comp = res.Competition;
+  
 }
 </script>
 
 <template>
   <userInputs class="inputRow" @playerDataFetched="savePlayerCompetitionIds"> </userInputs>
-  <p v-for="num in playerData">{{ num }}</p>
+  <p v-for="num in playerComps">{{ num }}</p>
 </template>
 
 <style scoped>

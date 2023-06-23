@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const props = defineProps<{ CompetitionId: number }>();
+import { Competition } from "../services/metrixApi";
+
+const props = defineProps<{ CompetitionId: Competition }>();
+
 
 </script>
 

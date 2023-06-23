@@ -7,13 +7,16 @@ let metrixId: number | null = null;
 const emit = defineEmits(["playerDataFetched"]);
 
 const getPlayerInfo = async () => {
+  // TODO REMEMBER TO REMOVE default codes/ids
+  integrationCode = "AEeT0grHidF20J8dBJ9GQkUVhoaDcsFe";
+  metrixId = 70022;
   if (integrationCode === "" || metrixId === null) {
     alert("Insert both codes");
     return;
   }
   const data = await fetchPlayerCompetitions(integrationCode);
 
-  emit("playerDataFetched", data);
+  emit("playerDataFetched", data, integrationCode);
 };
 </script>
 
